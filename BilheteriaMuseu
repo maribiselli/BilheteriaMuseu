@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+#include <time.h> //Biblioteca para criação de números aleatórios//
+
+// Função para armazenar informações da pessoa
+struct Pessoa {
+    char nome[100];
+    char email[100];
+    char endereco[100];
+    char cidade[30];
+};
+
+// Definir uma estrutura para armazenar informações do ingresso
+struct Ingresso {
+    char tipo[15];
+    char data[10];
+    char horario[10];
+};
+
+int main() {
+    struct Pessoa pessoa;
+    struct Ingresso ingresso;
+    int opcao;
+
+    setlocale(LC_ALL, "Portuguese");
+
+    while (1) {
+        printf("\n\n");
+        printf("\t\t\tSistema de Bilheteria\n\n");
+        printf("\t\t(1) Realizar Cadastro\n");
+        printf("\t\t(2) Comprar ingresso\n");
+        printf("\t\t(0) Sair do programa\n");
+        printf("Opção Desejada: ");
+        scanf("%d", &opcao);
+        getchar(); // Limpar o caractere de nova linha deixado pelo scanf
+
+        switch (opcao) {
+            case 1:
+                printf("\n*****CADASTRO DE PESSOA*****\n");
+                printf("Nome: ");
+                fgets(pessoa.nome, sizeof(pessoa.nome), stdin);
+                pessoa.nome[strcspn(pessoa.nome, "\n")] = '\0'; // Remover o caractere de nova linha
+                printf("Endere o: ");
+                fgets(pessoa.endereco, sizeof(pessoa.endereco), stdin);
+                pessoa.endereco[strcspn(pessoa.endereco, "\n")] = '\0'; // Remover o caractere de nova linha
+                printf("Email: ");
+                fgets(pessoa.email, sizeof(pessoa.email), stdin);
+                pessoa.email[strcspn(pessoa.email, "\n")] = '\0'; // Remover o caractere de nova linha
+                printf("*****CADASTRO REALIZADO COM SUCESSO******\n");
+                break;
+            case 2:
+                printf("\n****SELECIONE O TIPO DE ENTRADA****\n");
+                printf("Qual o tipo da entrada? (Meia ou inteira): ");
+                fgets(ingresso.tipo, sizeof(ingresso.tipo), stdin);
+                ingresso.tipo[strcspn(ingresso.tipo, "\n")] = '\0'; // Remover o caractere de nova linha
+                printf("Qual a data e horário da exposição (DD/MM/AAAA HH:MM): ");
+                fgets(ingresso.data, sizeof(ingresso.data), stdin);
+                ingresso.data[strcspn(ingresso.data, "\n")] = '\0'; // Remover o caractere de nova linha
+                fgets(ingresso.horario, sizeof(ingresso.horario), stdin);
+                ingresso.horario[strcspn(ingresso.horario, "\n")] = '\0'; // Remover o caractere de nova linha
+
+
+                printf("*****COMPRA REALIZADA COM SUCESSO******\n");
+                printf("O código do seu ingresso é:\n");
+                break;
+            case 0:
+                exit(0);
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+        }
+    }
+
+    return 0;
+}
